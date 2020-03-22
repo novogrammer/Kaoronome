@@ -7,11 +7,13 @@ public class CameraController : MonoBehaviour
     private Camera camera;
     public GameObject VirtualCameraA;
     public GameObject VirtualCameraB;
+    private Metronome metronome;
 
     // Start is called before the first frame update
     void Start()
     {
         this.camera = GetComponent<Camera>();
+        this.metronome = GetComponent<Metronome>();
         
     }
 
@@ -23,12 +25,20 @@ public class CameraController : MonoBehaviour
         Vector3 positionB = VirtualCameraB.transform.localPosition;
         Quaternion rotationB = VirtualCameraB.transform.localRotation;
 
-        float time = Time.time;
-        float r = Mathf.Sin(time)*0.5f+0.5f ;
-        Vector3 position = Vector3.Lerp(positionA, positionB, r);
-        Quaternion rotation = Quaternion.Slerp(rotationA, rotationB, r);
-
-
+        float beatProgress=this.metronome.BeatProgress;
+        int beatCount = this.metronome.BeatCount;
+        Vector3 position;
+        Quaternion rotation;
+        if (beatCount % 2 == 0)
+        {
+            position = Vector3.Lerp(positionA, positionB, beatProgress);
+            rotation = Quaternion.Slerp(rotationA, rotationB, beatProgress);
+        }
+        else
+        {
+            position = Vector3.Lerp(positionB, positionA, beatProgress);
+            rotation = Quaternion.Slerp(rotationB, rotationA, beatProgress);
+        }
         this.transform.SetPositionAndRotation(position, rotation);
     }
 }
