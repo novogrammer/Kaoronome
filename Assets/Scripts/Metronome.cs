@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Metronome : MonoBehaviour
 {
-    public float bpm =60;
+    private float bpm =60;
+    public float BPM
+    {
+        get { return this.bpm; }
+    }
     public int beatCountQty = 32;
     private int beatCount;
     public int BeatCount
@@ -16,11 +20,16 @@ public class Metronome : MonoBehaviour
         get { return this.timeFromPreviousBeat/ this.GetSPB(); }
     }
     private float timeFromPreviousBeat;
+
+    private float previousTapTime;
+
+    private const float BPM_MIN = 15.0f;
+    private const float BPM_MAX = 500.0f;
     
     void Start()
     {
-        
-        
+        this.previousTapTime = Time.time;
+
     }
 
 
@@ -32,9 +41,25 @@ public class Metronome : MonoBehaviour
         {
             this.beatCount=(this.beatCount+1)%this.beatCountQty;
             this.timeFromPreviousBeat -= spb;
-            Debug.Log(this.beatCount);
         }
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            float time = Time.time;
+            float duration = time - this.previousTapTime;
+            float newBpm = 60.0f / duration;
+            if (BPM_MIN <= newBpm && newBpm <= BPM_MAX)
+            {
+                if (0.5f<this.BeatProgress)
+                {
+                    this.beatCount = (this.beatCount + 1) % this.beatCountQty;
+                }
+                this.bpm = newBpm;
+                Debug.Log("bpm:" + this.bpm);
+
+                this.timeFromPreviousBeat = 0.0f;
+            }
+            this.previousTapTime = time;
+        }
     }
 
 
