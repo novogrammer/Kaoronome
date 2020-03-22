@@ -1,18 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/**
- * TODO:
- * 二点を移動する、二次ベジエなどが必要かもしれない。
- * メトロノーム機能、タップ機能
- * githubへプロジェクトを登録する
- * 二台目追加、シリアルナンバーを指定すると可能
- * ポイントクラウドをカスタムする
- * 
- * 
- */
-
-
 
 public class Metronome : MonoBehaviour
 {
