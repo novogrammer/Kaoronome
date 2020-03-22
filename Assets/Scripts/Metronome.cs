@@ -9,6 +9,17 @@ public class Metronome : MonoBehaviour
     {
         get { return this.bpm; }
     }
+    public float SPB
+    {
+        get
+        {
+            if (this.bpm <= 0.0)
+            {
+                return float.MaxValue;
+            }
+            return 60.0f / this.bpm;
+        }
+    }
     public int beatCountQty = 32;
     private int beatCount;
     public int BeatCount
@@ -17,7 +28,11 @@ public class Metronome : MonoBehaviour
     }
     public float BeatProgress
     {
-        get { return this.timeFromPreviousBeat/ this.GetSPB(); }
+        get { return this.TimeFromPreviousBeat / this.SPB; }
+    }
+    public float TimeFromPreviousBeat
+    {
+        get { return this.timeFromPreviousBeat; }
     }
     private float timeFromPreviousBeat;
 
@@ -35,7 +50,7 @@ public class Metronome : MonoBehaviour
 
     void FixedUpdate()
     {
-        var spb = this.GetSPB();
+        float spb = this.SPB;
         this.timeFromPreviousBeat += Time.fixedDeltaTime;
         if (spb <= this.timeFromPreviousBeat)
         {
@@ -63,13 +78,6 @@ public class Metronome : MonoBehaviour
     }
 
 
-    private float GetSPB()
-    {
-        if (this.bpm<=0.0)
-        {
-            return float.MaxValue;
-        }
-        return 60.0f/this.bpm;
-    }
+
 
 }

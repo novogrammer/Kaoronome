@@ -283,6 +283,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23213942756892742, guid: a2bade7ff40ff92409855b062870dccd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bfc56f30d9495d2498434731ee6c2b0c, type: 2}
     - target: {fileID: 114148710568042142, guid: a2bade7ff40ff92409855b062870dccd,
         type: 3}
       propertyPath: Source
@@ -290,6 +295,24 @@ PrefabInstance:
       objectReference: {fileID: 1496058661}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2bade7ff40ff92409855b062870dccd, type: 3}
+--- !u!1 &554362626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1308323762867094, guid: a2bade7ff40ff92409855b062870dccd,
+    type: 3}
+  m_PrefabInstance: {fileID: 554362625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &554362627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554362626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b9a54369f115654ea51e12a2a357378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &623865072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -489,7 +512,7 @@ PrefabInstance:
         type: 3}
       propertyPath: textureBinding.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2100000, guid: a88d3559a65c7024fb983e435d846e5e, type: 2}
+      objectReference: {fileID: 2100000, guid: bfc56f30d9495d2498434731ee6c2b0c, type: 2}
     - target: {fileID: 114015623498811666, guid: d2790e271f1a64347bb2ede5601b1e23,
         type: 3}
       propertyPath: textureBinding.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -1142,5 +1165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: befebe33a7831d54b8b7b0b8c5cf2a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bpm: 60
   beatCountQty: 32

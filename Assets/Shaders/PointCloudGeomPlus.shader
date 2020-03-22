@@ -9,6 +9,9 @@ Shader "Custom/PointCloudGeomPlus"
 		_PointSize("Point Size", Float) = 4.0
 		_Color("PointCloud Color", Color) = (1, 1, 1, 1)
 		[Toggle(USE_DISTANCE)]_UseDistance("Scale by distance?", float) = 0
+		_WaveVelocity("Wave Velocity",Float) = 1.0
+		_SPB("Second Per Beat",float) = 0.0
+		_TimeFromPreviousBeat("Time From Previous Beat",Float)=0.0
 	}
     SubShader
     {
@@ -41,6 +44,10 @@ Shader "Custom/PointCloudGeomPlus"
 
 			sampler2D _UVMap;
 			float4 _UVMap_TexelSize;
+
+			float _WaveVelocity;
+			float _SPB;
+			float _TimeFromPreviousBeat;
 
 			struct g2f
 			{
@@ -97,11 +104,40 @@ Shader "Custom/PointCloudGeomPlus"
 				triStream.Append(o);
 
 			}
+			// https://thebookofshaders.com/edit.php?log=160909064320
+			float easeInQuad(float t) {
+				return t * t;
+			}
 
+			float easeOutQuad(float t) {
+				return -1.0 * t * (t - 2.0);
+			}
+			float easeInOutQuad(float t) {
+				if ((t *= 2.0) < 1.0) {
+					return 0.5 * t * t;
+				}
+				else {
+					return -0.5 * ((t - 1.0) * (t - 3.0) - 1.0);
+				}
+			}
             v2f vert (appdata v)
             {
                 v2f o;
 				o.vertex = v.vertex;
+				float4 wVertex= mul(unity_ObjectToWorld, v.vertex);
+
+
+				float beatLength=_WaveVelocity * _SPB;
+				float waveX = _WaveVelocity* _TimeFromPreviousBeat;
+				float waveProgress = frac((abs(wVertex.x) - waveX) / beatLength);
+				if (waveProgress < 0.25) {
+					wVertex.y -= easeInOutQuad(waveProgress/0.25)*0.1;
+				}
+				else if (waveProgress < 0.5) {
+					wVertex.y -= (1.0 - easeInOutQuad((waveProgress-0.25) / 0.25))*0.1;
+				}
+				o.vertex = mul(unity_WorldToObject, wVertex);
+
 				o.uv = v.uv;
 				return o;
             }
@@ -113,7 +149,9 @@ Shader "Custom/PointCloudGeomPlus"
 					discard;
 				// offset to pixel center
 				uv += 0.5 * _MainTex_TexelSize.xy;
-				return tex2D(_MainTex, uv) * _Color;
+				fixed4 color = tex2D(_MainTex, uv) * _Color;
+				// color.r = _TimeFromPreviousBeat /_SPB;
+				return color;
             }
             ENDCG
         }
