@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private Camera camera;
     public GameObject VirtualCameraA;
     public GameObject VirtualCameraB;
     public GameObject VirtualCameraC;
@@ -13,7 +12,6 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.camera = GetComponent<Camera>();
         this.metronome = GetComponent<Metronome>();
         
     }
