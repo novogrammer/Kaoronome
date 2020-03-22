@@ -1,13 +1,21 @@
-﻿using System.Collections;
+﻿using System .Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Metronome : MonoBehaviour
 {
-    public double bpm=120;
+    public float bpm =120;
     public int beatCountQty = 32;
     private int beatCount;
-    private double timeFromPreviousBeat;
+    public int BeatCount
+    {
+        get { return this.beatCount; }
+    }
+    public float BeatProgress
+    {
+        get { return this.timeFromPreviousBeat/ this.GetSPB(); }
+    }
+    private float timeFromPreviousBeat;
     
     void Start()
     {
@@ -23,19 +31,20 @@ public class Metronome : MonoBehaviour
         if (spb <= this.timeFromPreviousBeat)
         {
             this.beatCount=(this.beatCount+1)%this.beatCountQty;
-
+            this.timeFromPreviousBeat -= spb;
+            Debug.Log(this.beatCount);
         }
         
     }
 
 
-    private double GetSPB()
+    private float GetSPB()
     {
         if (this.bpm<=0.0)
         {
-            return double.MaxValue;
+            return float.MaxValue;
         }
-        return 60.0/this.bpm;
+        return 60.0f/this.bpm;
     }
 
 }
