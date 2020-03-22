@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Metronome : MonoBehaviour
 {
-    public float bpm =120;
+    public float bpm =60;
     public int beatCountQty = 32;
     private int beatCount;
     public int BeatCount
