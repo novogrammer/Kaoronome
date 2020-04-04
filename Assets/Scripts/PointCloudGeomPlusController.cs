@@ -15,8 +15,13 @@ public class PointCloudGeomPlusController : MonoBehaviour
 
     void Update()
     {
-        this.meshRenderer.sharedMaterial.SetFloat("_SPB", this.metronome.SPB);
-        this.meshRenderer.sharedMaterial.SetFloat("_TimeFromPreviousBeat", this.metronome.TimeFromPreviousBeat);
+        this.meshRenderer.material.SetFloat("_SPB", this.metronome.SPB);
+        this.meshRenderer.material.SetFloat("_TimeFromPreviousBeat", this.metronome.TimeFromPreviousBeat);
 
+    }
+
+    public void UpdateTexture(Texture texture)
+    {
+        this.meshRenderer.material.SetTexture("_MainTex", texture);
     }
 }
