@@ -317,7 +317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &392134203
 Transform:
   m_ObjectHideFlags: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9a54369f115654ea51e12a2a357378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metronomeHolder: {fileID: 0}
+  metronomeHolder: {fileID: 2133302834}
 --- !u!1001 &623865072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -901,7 +901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9a54369f115654ea51e12a2a357378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metronomeHolder: {fileID: 0}
+  metronomeHolder: {fileID: 2133302834}
 --- !u!1 &1217925132
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,7 +917,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1217925133
 Transform:
   m_ObjectHideFlags: 0
