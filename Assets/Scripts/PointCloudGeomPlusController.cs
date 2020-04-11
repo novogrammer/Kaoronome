@@ -5,7 +5,7 @@ using UnityEngine;
 public class PointCloudGeomPlusController : MonoBehaviour
 {
     private MeshRenderer meshRenderer;
-    public Metronome metronome;
+    public MetronomeHolder metronomeHolder;
     void Start()
     {
         this.meshRenderer = GetComponent<MeshRenderer>();
@@ -15,8 +15,9 @@ public class PointCloudGeomPlusController : MonoBehaviour
 
     void Update()
     {
-        this.meshRenderer.material.SetFloat("_SPB", this.metronome.SPB);
-        this.meshRenderer.material.SetFloat("_TimeFromPreviousBeat", this.metronome.TimeFromPreviousBeat);
+        Metronome.MetronomeSnapshot metronomeSnapshot = this.metronomeHolder.GetMetronomeSnapshot();
+        this.meshRenderer.material.SetFloat("_SPB", metronomeSnapshot.SPB);
+        this.meshRenderer.material.SetFloat("_TimeFromPreviousBeat", metronomeSnapshot.TimeFromPreviousBeat);
 
     }
 

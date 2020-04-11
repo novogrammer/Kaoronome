@@ -7,12 +7,12 @@ public class CameraController : MonoBehaviour
     public GameObject VirtualCameraA;
     public GameObject VirtualCameraB;
     public GameObject VirtualCameraC;
-    private Metronome metronome;
+    private MetronomeHolder metronomeHolder;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.metronome = GetComponent<Metronome>();
+        this.metronomeHolder = GetComponent<MetronomeHolder>();
         
     }
 
@@ -26,8 +26,9 @@ public class CameraController : MonoBehaviour
         Vector3 positionC = VirtualCameraC.transform.localPosition;
         Quaternion rotationC = VirtualCameraC.transform.localRotation;
 
-        float beatProgress =this.metronome.BeatProgress;
-        int beatCount = this.metronome.BeatCount;
+        Metronome.MetronomeSnapshot metronomeSnapshot = this.metronomeHolder.GetMetronomeSnapshot(0.25f);
+        float beatProgress = metronomeSnapshot.BeatProgress;
+        int beatCount = metronomeSnapshot.BeatCount;
         Vector3 position;
         Quaternion rotation;
         if (beatCount % 2 == 0)
