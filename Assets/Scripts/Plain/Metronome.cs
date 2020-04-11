@@ -36,6 +36,10 @@ public class Metronome
             return 60.0f / this.bpm;
         }
     }
+    public int BeatCountQty
+    {
+        get { return this.beatCountQty; }
+    }
     public int BeatCount
     {
         get { return this.beatCount; }
@@ -48,6 +52,43 @@ public class Metronome
     {
         get { return this.timeFromPreviousBeat; }
     }
+    public float Time
+    {
+        get {
+            float time = this.SPB * this.beatCount + this.timeFromPreviousBeat;
+            return time;
+        }
+        set
+        {
+            float time = value;
+            this.timeFromPreviousBeat = 0;
+            this.beatCount = 0;
+            this.Update(time);
+        }
+    }
+
+    public struct MetronomeSnapshot
+    {
+        public float BPM;
+        public float SPB;
+        public int BeatCount;
+        public float BeatProgress;
+        public float TimeFromPreviousBeat;
+
+    }
+    public MetronomeSnapshot GetMetronomeSnapshot()
+    {
+        MetronomeSnapshot metronomeSnapshot = new MetronomeSnapshot()
+        {
+            BPM = this.BPM,
+            SPB = this.SPB,
+            BeatCount = this.BeatCount,
+            BeatProgress = this.BeatProgress,
+            TimeFromPreviousBeat = this.TimeFromPreviousBeat,
+        };
+        return metronomeSnapshot;
+    }
+
 
 
     public Metronome(float bpm, int beatCountQty)
@@ -60,7 +101,7 @@ public class Metronome
     {
         float spb = this.SPB;
         this.timeFromPreviousBeat += dt;
-        if (spb <= this.timeFromPreviousBeat)
+        while(spb <= this.timeFromPreviousBeat)
         {
             this.beatCount = (this.beatCount + 1) % this.beatCountQty;
             this.timeFromPreviousBeat -= spb;

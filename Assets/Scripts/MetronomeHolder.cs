@@ -11,32 +11,18 @@ public class MetronomeHolder : MonoBehaviour
 
     private Metronome metronome;
 
-    public struct MetronomeSnapshot
-    {
-        public float BPM;
-        public float SPB;
-        public int BeatCount;
-        public float BeatProgress;
-        public float TimeFromPreviousBeat;
-
-    }
-    public MetronomeSnapshot GetMetronomeSnapshot()
-    {
-        MetronomeSnapshot metronomeSnapshot = new MetronomeSnapshot()
-        {
-            BPM = this.metronome.BPM,
-            SPB = this.metronome.SPB,
-            BeatCount = this.metronome.BeatCount,
-            BeatProgress = this.metronome.BeatProgress,
-            TimeFromPreviousBeat = this.metronome.TimeFromPreviousBeat,
-        };
-        return metronomeSnapshot;
-    }
 
     void Start()
     {
         this.previousTapTime = Time.time;
         this.metronome = new Metronome(60, 32);
+    }
+    public Metronome.MetronomeSnapshot GetMetronomeSnapshot()
+    {
+        Metronome m = new Metronome(this.metronome.BPM, this.metronome.BeatCountQty);
+        m.Time = this.metronome.Time;
+        return m.GetMetronomeSnapshot();
+        // return this.metronome.GetMetronomeSnapshot();
     }
 
 

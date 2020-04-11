@@ -15,7 +15,7 @@ public class PointCloudGeomPlusController : MonoBehaviour
 
     void Update()
     {
-        MetronomeHolder.MetronomeSnapshot metronomeSnapshot = this.metronomeHolder.GetMetronomeSnapshot();
+        Metronome.MetronomeSnapshot metronomeSnapshot = this.metronomeHolder.GetMetronomeSnapshot();
         this.meshRenderer.material.SetFloat("_SPB", metronomeSnapshot.SPB);
         this.meshRenderer.material.SetFloat("_TimeFromPreviousBeat", metronomeSnapshot.TimeFromPreviousBeat);
 
