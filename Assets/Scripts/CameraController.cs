@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
         Vector3 positionC = VirtualCameraC.transform.localPosition;
         Quaternion rotationC = VirtualCameraC.transform.localRotation;
 
-        Metronome.MetronomeSnapshot metronomeSnapshot = this.metronomeHolder.GetMetronomeSnapshot();
+        Metronome.MetronomeSnapshot metronomeSnapshot = this.metronomeHolder.GetMetronomeSnapshot(0.25f);
         float beatProgress = metronomeSnapshot.BeatProgress;
         int beatCount = metronomeSnapshot.BeatCount;
         Vector3 position;

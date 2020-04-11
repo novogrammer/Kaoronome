@@ -17,9 +17,9 @@ public class MetronomeHolder : MonoBehaviour
         this.previousTapTime = Time.time;
         this.metronome = new Metronome(60, 32);
     }
-    public Metronome.MetronomeSnapshot GetMetronomeSnapshot()
+    public Metronome.MetronomeSnapshot GetMetronomeSnapshot(float bpmScale=1.0f)
     {
-        Metronome m = new Metronome(this.metronome.BPM, this.metronome.BeatCountQty);
+        Metronome m = new Metronome(this.metronome.BPM * bpmScale, (int)Mathf.Round(this.metronome.BeatCountQty * bpmScale));
         m.Time = this.metronome.Time;
         return m.GetMetronomeSnapshot();
         // return this.metronome.GetMetronomeSnapshot();
